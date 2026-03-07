@@ -34,16 +34,33 @@ def is_palindrome(s):
     Returns:
         bool: 회문이면 True, 아니면 False
     """
+    s_list = []
     # TODO: 알파벳과 숫자만 남기고 소문자로 변환하세요
     # 힌트: isalnum() 메서드와 lower() 메서드 사용
+    for char in s:
+        if(char.isalnum()):    
+            s_list.append(char.lower());
     pass
     
     # TODO: 정제된 문자열이 회문인지 확인하세요
     # 방법1: 문자열을 뒤집어서 비교 ([::-1] 사용)
+    # if(s_list != s_list[::-1]):
+    #     return False
+
     # 방법2: 양 끝 인덱스를 이용한 투 포인터 방식
+
+    # 리스트의 처음과 끝 두개의 포인터를 가지고 차례대로 비교하는 방식으로 구현
+    start = 0
+    end = len(s_list) - 1
+    for _ in range(len(s_list) // 2):
+        if (s_list[start] != s_list[end]):
+            return False
+        start += 1
+        end -= 1
+
     pass
     
-    #return False
+    return True
 
 # 테스트 케이스
 if __name__ == "__main__":
