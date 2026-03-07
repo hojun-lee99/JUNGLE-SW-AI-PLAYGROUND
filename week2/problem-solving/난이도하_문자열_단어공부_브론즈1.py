@@ -3,20 +3,12 @@
 import sys
 input = sys.stdin.readline
 
-s = input().strip()
-s_list = []
+word = input().strip().upper()
 
-for char in s:
-  dic = {}
-  s_list.append(char.upper())
+dic = {}
 
-str = ''.join(s_list)
-
-for i, value in enumerate(s_list[:]):
-  if not dic.get(value):
-    dic[value] = 1
-  else:
-    dic[value] += 1
+for char in word:
+  dic[char] = dic.get(char, 0) + 1
 
 max_value = max(dic.values())
 max_key = None
