@@ -43,7 +43,6 @@ def combinations(n, k):
     """
     
     def backtrack(start, current_combination):
-        print(f"start:{start}, current_combination:{current_combination}")
         """
         백트랙킹 헬퍼 함수
         
@@ -69,7 +68,6 @@ def combinations(n, k):
 
     
     backtrack(1, [])
-    print(result)
     return result
 
 def combinations_itertools_compare(n, k):
