@@ -53,6 +53,7 @@ def combinations(n, k):
         # TODO: base case - k개를 모두 선택했으면 결과에 추가
         if (len(current_combination) == k):
             result.append(current_combination.copy())
+            return
         pass
         
         # TODO: start부터 n까지 숫자를 하나씩 시도
@@ -109,4 +110,3 @@ if __name__ == "__main__":
     result4 = combinations(n4, k4)
     print(f"C({n4}, {k4}) = {result4}")
     print(f"총 {len(result4)}개의 조합")
-
