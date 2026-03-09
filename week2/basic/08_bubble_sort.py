@@ -31,6 +31,37 @@ def bubble_sort(arr):
     
     Returns:
         정렬된 배열
+
+    인접 원소 자리 바꾸는 방법
+    - left, right, swap = None
+    - 1. swap = right, 2. right = left 3. left = swap
+
+    버블 정렬 예시 시각화
+    1. [64, 34, 25, 12, 22, 11, 90]: 64랑 34 비교, 64가 더 크니깐 자리변경
+    2. [34, 64, 25, 12, 22, 11, 90]: 64, 25 자리변경 o
+    3. [34, 25, 64, 12, 22, 11, 90]: 64, 12 자리변경 o
+    4. [34, 25, 12, 64, 22, 11, 90]: 64, 22 자리변경 o
+    5. [34, 25, 12, 22, 64, 11, 90]: 64, 11 자리변경 o
+    6. [34, 25, 12, 22, 11, 64, 90]: 64, 90 자리변경 x
+    스왑이 발생했으니깐 한번 더 반복
+    1. [34, 25, 12, 22, 11, 64, 90]
+    2. [25, 34, 12, 22, 11, 64, 90]
+    3. [25, 12, 34, 22, 11, 64, 90]
+    4. [25, 12, 22, 34, 11, 64, 90]
+    5. [25, 12, 22, 11, 34, 64, 90]: 
+    6. [25, 12, 22, 11, 34, 64, 90]: 
+    스왑이 발생했으니 한번 더 반복
+    1. [25, 12, 22, 11, 34, 64, 90]
+    2. [12, 25, 22, 11, 34, 64, 90]
+    3. [12, 22, 25, 11, 34, 64, 90]
+    4. [12, 22, 11, 25, 34, 64, 90] 
+    5. [12, 22, 11, 25, 34, 64, 90] 
+    6. [12, 22, 11, 25, 34, 64, 90] 
+    
+    버블 정렬 과정 정리
+    1. 첫번째부터 n-1번째 까지 순회하면서, 인접한 요소의 크기를 비교
+    2. 인접한 요소의 크기가 정렬순서와 반대로라면 자리 바꿈
+    3. n-1회 이 과정을 반복
     """
     n = len(arr)
     
@@ -41,6 +72,12 @@ def bubble_sort(arr):
     ## TODO: 인접한 두 원소 비교 및 교환
     ## arr[j] > arr[j+1]이면 교환
     ## 외부 반복문: n-1번 실행
+    for i in range(n-1):
+        for j in range(n-i-1):
+            if(arr[j] > arr[j+1]):
+                swap = arr[j+1]
+                arr[j+1] = arr[j]
+                arr[j] = swap
     pass
         
     return arr
@@ -61,11 +98,19 @@ def bubble_sort_optimized(arr):
         swapped = False  # 교환 발생 여부
         
         # TODO: 내부 반복문과 교환 로직 구현
-        # 교환이 발생하면 swapped = True 설정        
-        pass
+        # 교환이 발생하면 swapped = True 설정
+        for j in range(n-i-1):
+            if(arr[j] > arr[j+1]):
+                swap = arr[j+1]
+                arr[j+1] = arr[j]
+                arr[j] = swap        
+                swapped = True
+                pass
         
 
         # TODO: 교환이 없으면 이미 정렬된 것이므로 break
+        if(not swapped):
+            break
         pass
 
     return arr
@@ -76,7 +121,7 @@ if __name__ == "__main__":
     arr1 = [64, 34, 25, 12, 22, 11, 90]
     print("=== 테스트 케이스 1 ===")
     print(f"정렬 전: {arr1}")
-    result1 = bubble_sort(arr1.copy())
+    result1 = bubble_sort_optimized(arr1.copy())
     print(f"정렬 후: {result1}")
     print()
     
@@ -93,7 +138,7 @@ if __name__ == "__main__":
     arr3 = [5, 4, 3, 2, 1]
     print("=== 테스트 케이스 3: 역순 ===")
     print(f"정렬 전: {arr3}")
-    result3 = bubble_sort(arr3.copy())
+    result3 = bubble_sort_optimized(arr3.copy())
     print(f"정렬 후: {result3}")
 
 
