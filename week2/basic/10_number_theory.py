@@ -23,6 +23,7 @@
 - 유클리드 호제법: gcd(a, b) = gcd(b, a % b)
 - LCM 공식: lcm(a, b) = (a × b) / gcd(a, b)
 """
+import math
 
 def gcd(a, b):
     """
@@ -37,6 +38,10 @@ def gcd(a, b):
     # TODO: 유클리드 호제법 구현
     # base case: b가 0이면 a 반환
     # recursive를 이용 
+    if(b == 0):
+        return a
+    
+    return gcd(b, a % b)
     pass
 
 def gcd_iterative(a, b):
@@ -51,7 +56,14 @@ def gcd_iterative(a, b):
     """
     # TODO: 반복문으로 구현
     # b가 0이 될 때까지 반복
+    while(b != 0):
+        r = a % b
+        a = b
+        b = r
+
+    return a
     pass
+    
 
 def lcm(a, b):
     """
@@ -64,6 +76,7 @@ def lcm(a, b):
         최소공배수
     """
     # TODO: LCM 계산
+    return int((a * b) / gcd(a, b))
     pass
 
 def extended_gcd(a, b):
@@ -79,8 +92,13 @@ def extended_gcd(a, b):
     """
     # TODO: 확장 유클리드 호제법 구현
     # base case: b가 0이면 (a, 1, 0) 반환    
+    if (b == 0):
+        return (a, 1, 0)
     # recursive case
+    gcd, x1, y1 = extended_gcd(b, b % a)
     # 역추적하며 x, y 계산
+    gcd = a*x - b*y
+
     pass
 
 def is_prime(n):
@@ -97,6 +115,22 @@ def is_prime(n):
     # n이 2보다 작으면 False
     # 2부터 sqrt(n)까지 나누어 떨어지는지 확인    
     # 3부터 sqrt(n)까지 홀수만 확인
+
+    # 제곱근 보다 큰 약수는 짝을 이루는 작은 약수가 있기 때문에 제곱근까지의 범위만 판별한다.
+
+    if(n < 2):
+        return False
+    if(n == 2):
+        return True
+    if(n % 2 == 0):
+        return False
+    for i in range(2, int(math.sqrt(n)) + 2):
+        if(n % i == 0):
+            return False        
+
+    return True
+    
+
     pass 
 
 # 테스트 케이스
