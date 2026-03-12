@@ -36,13 +36,13 @@ def hanoi_big_num(n, source, target, auxiliary):
   if (n == 1):
     return 1
     
-  return hanoi_big_num(n-1, source, auxiliary, target) * 2 + hanoi_big_num(1, source, target, auxiliary)
+  return hanoi_big_num(n-1, source, auxiliary, target) * 2 + 1
 
 
 def main():
   size = int(input())
 
-  if(size < 21):
+  if(size <= 20):
     result_list = []
     print(hanoi_small_num(size, "1", "3", "2", result_list))
     for i in result_list :
@@ -51,3 +51,8 @@ def main():
     print(hanoi_big_num(size, "1", "3", "2"))
 
 main()
+
+s = str()
+s = s + "!"
+s.join()
+lst = list()
