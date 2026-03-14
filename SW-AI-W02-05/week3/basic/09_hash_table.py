@@ -30,7 +30,7 @@
 - 최고점: max(scores, key=scores.get)
 """
 
-def manage_grades(students):
+def manage_grades(students: dict):
     """
     학생 성적 관리 시스템
     
@@ -41,15 +41,21 @@ def manage_grades(students):
         평균, 최고점 학생 이름, 최고점
     """
     # TODO: 평균 점수 계산
+    total_score = sum(list(students.values()))
+
+    average = total_score / len(students)
+
     pass
     
     
     # TODO: 최고 점수 학생 찾기
+    top_student = max(students, key=students.get)
+    top_score = students.get(top_student)
     pass
     
     return average, top_student, top_score
 
-def find_student_score(students, name):
+def find_student_score(students: dict, name):
     """
     특정 학생의 점수 조회
     
@@ -61,6 +67,9 @@ def find_student_score(students, name):
         점수 (없으면 None)
     """
     # TODO: students에서 name 찾기
+    score = students.get(name)
+
+    return score
     pass
 
 # 테스트 케이스
