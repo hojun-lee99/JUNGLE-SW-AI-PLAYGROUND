@@ -43,25 +43,25 @@ def partition(arr, low, high):
     pass
     
     # TODO: i는 작은 원소들의 마지막 인덱스를 추적
-    i = low - 1
+    orange_index = low - 1
     pass
     
     # TODO: low부터 high-1까지 순회하면서
     ## 현재 원소가 피벗보다 작거나 같으면:
     ##   1. i를 1 증가
     ##   2. arr[i]와 arr[j]를 교환
-    for j in range(low, high):
-        if(arr[j] <= pivot):
-            i += 1
-            if (j > i):
-                swap(arr, i, j)
+    for green_index in range(low, high):
+        if(arr[green_index] <= pivot):
+            orange_index += 1
+            if (green_index > orange_index):
+                swap(arr, orange_index, green_index)
     pass
     
     # TODO: 피벗을 올바른 위치(i+1)에 배치
-    swap(arr, i+1, high)
+    swap(arr, orange_index+1, high)
     pass
     
-    return i + 1
+    return orange_index + 1
 
 def quick_sort_helper(arr, low, high):
     """
