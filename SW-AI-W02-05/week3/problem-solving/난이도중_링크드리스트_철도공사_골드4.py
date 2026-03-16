@@ -19,19 +19,13 @@ class Node():
 class SubwayLine2():
   def __init__(self):
     self.head = None
-    # self.tail = None
+    self.node_list = [None for _ in range(1000001)]
   
   def _print_unique_num(self, node: Node):
     print(node.unique_num)
-    pass
 
   def _get_find_node(self, unique_num: int):
-    next_node = self.head
-    
-    while(next_node.unique_num != unique_num):
-      next_node = next_node.next
-
-    return next_node
+    return self.node_list[unique_num]
   
   def _insert_between(self, first_node: Node, second_node: Node, insert_node: Node):
     first_node.next = insert_node
@@ -45,6 +39,8 @@ class SubwayLine2():
 
   def append(self, unique_num: int):
     append_node = Node(unique_num)
+
+    self.node_list[unique_num] = append_node
     
     if(self.head == None):
       self.head = append_node
@@ -57,9 +53,7 @@ class SubwayLine2():
   def insert_next(self, find_unique_num: int, insert_unique_num: int):
     insert_node = Node(insert_unique_num)
     
-    if(self.head.unique_num == find_unique_num):
-      self._print_unique_num(self.head.next)
-      self._insert_between(self.head, self.head, insert_node)
+    self.node_list[insert_unique_num] = insert_node
 
     find_node = self._get_find_node(find_unique_num)
     next_node = find_node.next
@@ -71,9 +65,7 @@ class SubwayLine2():
   def insert_prev(self, find_unique_num: int, insert_unique_num: int):
     insert_node = Node(insert_unique_num)
 
-    if(self.head.unique_num == find_unique_num):
-      self._print_unique_num(self.head.prev)
-      self._insert_between(self.head, self.head, insert_node)
+    self.node_list[insert_unique_num] = insert_node
     
     find_node = self._get_find_node(find_unique_num)
     prev_node = find_node.prev
@@ -100,16 +92,20 @@ def exec_command(command, subway: SubwayLine2):
     find_unique_num = int(command[1])
     insert_unique_num = int(command[2])
     subway.insert_next(find_unique_num, insert_unique_num)
+    return
   if(command[0] == "BP"):
     find_unique_num = int(command[1])
     insert_unique_num = int(command[2])
     subway.insert_prev(find_unique_num, insert_unique_num)
+    return
   if(command[0] == "CN"):
     find_unique_num = int(command[1])
     subway.delete_next(find_unique_num)
+    return
   if(command[0] == "CP"):
     find_unique_num = int(command[1])
     subway.delete_prev(find_unique_num)
+    return
 
 def main():
   n, m = list(map(int, input().strip().split()))
