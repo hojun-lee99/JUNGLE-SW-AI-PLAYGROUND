@@ -18,11 +18,11 @@
 
 예제:
 트리:
-      5
-     / \
-    3   7
-   / \
-  2   4
+#      5
+#     / \
+#    3   7
+#   / \
+#  2   4
 
 찾는 값: 4 → True
 찾는 값: 6 → False
@@ -51,11 +51,15 @@ def search_bst(root, target):
         True/False
     """
     # TODO: root가 None이면 False 반환
+    if not root: return False
     pass
     
     # TODO: 값을 찾으면 True 반환
+    if root.value == target: return True
     ## target이 작으면 왼쪽 서브트리에서 검색
+    if target < root.value: return search_bst(root.left, target)
     ## target이 크면 오른쪽 서브트리에서 검색
+    if target > root.value: return search_bst(root.right, target)
     pass
 
 # 테스트 케이스
