@@ -15,13 +15,13 @@
 - 중위 순회: 왼쪽 → 루트 → 오른쪽
 - 후위 순회: 왼쪽 → 오른쪽 → 루트
 
-예제:
-트리 구조:
-      1
-     / \
-    2   3
-   / \
-  4   5
+# 예제:
+# 트리 구조:
+#      1
+#     / \
+#    2   3
+#   / \
+#  4   5
 
 전위: [1, 2, 4, 5, 3]
 중위: [4, 2, 5, 1, 3]
@@ -44,15 +44,20 @@ def preorder(root):
     result = []
     
     # TODO: root가 None이면 빈 리스트 반환
+    if(not root):
+        return result
     pass
     
     # TODO: 루트 값 추가
+    result.append(root.value)
     pass
     
     # TODO: 왼쪽 서브트리 순회
+    result.extend(preorder(root.left))
     pass
     
     # TODO: 오른쪽 서브트리 순회
+    result.extend(preorder(root.right))
     pass
     
     return result
@@ -62,15 +67,20 @@ def inorder(root):
     result = []
     
     # TODO: root가 None이면 빈 리스트 반환
+    if(not root):
+        return result
     pass
     
     # TODO: 왼쪽 서브트리 순회
+    result.extend(inorder(root.left))
     pass
     
     # TODO: 루트 값 추가
+    result.append(root.value)
     pass
     
     # TODO: 오른쪽 서브트리 순회
+    result.extend(inorder(root.right))
     pass
     
     return result
@@ -80,15 +90,20 @@ def postorder(root):
     result = []
     
     # TODO: root가 None이면 빈 리스트 반환
+    if(not root):
+        return result
     pass
     
     # TODO: 왼쪽 서브트리 순회
+    result.extend(postorder(root.left))
     pass
     
     # TODO: 오른쪽 서브트리 순회
+    result.extend(postorder(root.right))
     pass
     
     # TODO: 루트 값 추가
+    result.append(root.value)
     pass
     
     return result
