@@ -15,11 +15,11 @@
 
 예제:
 그래프:
-  0 ─── 1
-  │     │
-  └─ 2 ─┘
-      │
-      3
+#  0 ─── 1
+#  │     │
+#  └─ 2 ─┘
+#     │
+#     3
 
 시작: 0
 DFS: [0, 1, 2, 3] (순서는 구현에 따라 다를 수 있음)
@@ -43,13 +43,18 @@ def dfs(graph, start, visited=None):
         방문 순서 리스트
     """
     # TODO: visited가 None이면 초기화
+    if not visited: visited = []
     pass
     
     # TODO: 현재 정점 방문
+    visited.append(start)
     pass
     
     # TODO: 인접한 정점들에 대해 재귀
     ## 방문하지 않은 정점이면 재귀 호출
+    for node in graph[start]:
+        if node not in visited:
+            dfs(graph, node, visited)
     pass
     
     return visited
