@@ -89,7 +89,9 @@ def fibonacci_memo(n, memo=None):
     pass
     
     # TODO: base case
-    if(n <= 1):
+    if(n == 0):
+        return 0
+    if(n == 1):
         return 1
     pass
     
@@ -103,6 +105,20 @@ def fibonacci_memo(n, memo=None):
     pass
     
     return memo[n]
+
+def fibonacci_bottom_up(n):
+    # TODO: dp 테이블 정의하기
+    fib_list = []
+    # TODO: base case 설정하기
+    fib_list.append(0)
+    fib_list.append(1)
+    # TODO: 점화식(규칙) 찾기
+    # fib(n) = fib(n-1) + fib(n-2)
+    # TODO: 반복문으로 바닥부터 채우기
+    for i in range(2, n+1):
+        fib_list.append(fib_list[i-1] + fib_list[i-2])
+    
+    return fib_list[n]
 
 # 테스트 케이스
 if __name__ == "__main__":
@@ -124,4 +140,17 @@ if __name__ == "__main__":
     print("참고: 일반 재귀는 fib(40)도 몇 초 걸리지만")
     print("메모이제이션은 fib(100)도 순식간에 계산!")
 
-
+    # 테스트 케이스 1
+    print("=== 피보나치 수열 (메모이제이션) ===")
+    for i in range(11):
+        result = fibonacci_bottom_up(i)
+        print(f"fib({i}) = {result}")
+    print()
+    
+    # 테스트 케이스 2: 큰 수도 빠르게 계산
+    print("=== 큰 수 계산 ===")
+    n = 50
+    result = fibonacci_bottom_up(n)
+    print(f"fib({n}) = {result}")
+    print()
+    
