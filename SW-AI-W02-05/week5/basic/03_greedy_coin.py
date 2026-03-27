@@ -48,11 +48,10 @@ def make_change_greedy(change, coins):
     ## 개수가 0보다 크면 결과에 추가
     for coin in coins:
         num_coin = change // coin
-        if(num_coin != 0):
-            change = change - (coin * num_coin)
+        if num_coin > 0:
             result[coin] = num_coin
-        pass
-    pass
+            total_coins += num_coin
+            change %= coin
     
     return total_coins, result
 
