@@ -107,16 +107,18 @@ def fibonacci_memo(n, memo=None):
     return memo[n]
 
 def fibonacci_bottom_up(n):
-    # TODO: dp 테이블 정의하기
-    fib_list = []
     # TODO: base case 설정하기
-    fib_list.append(0)
-    fib_list.append(1)
+    if(n <=1):
+        return n
+    # TODO: dp 테이블 정의하기
+    fib_list = [0] * (n+1)
+    fib_list[0] = 0
+    fib_list[1] = 1
     # TODO: 점화식(규칙) 찾기
     # fib(n) = fib(n-1) + fib(n-2)
     # TODO: 반복문으로 바닥부터 채우기
     for i in range(2, n+1):
-        fib_list.append(fib_list[i-1] + fib_list[i-2])
+        fib_list[i] = fib_list[i-1] + fib_list[i-2]
     
     return fib_list[n]
 
