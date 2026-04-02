@@ -67,34 +67,46 @@
 # str2 = "world"
 # newstr = str1.__add__(str2)
 
-def letterNumCombination(str):
-  letters_list = {2 : ['a','b','c'],
-                  3 : ['d','e','f'],
-                  4 : ['g','h','i'],
-                  5 : ['j','k','l'],
-                  6 : ['m','n','o'],
-                  7 : ['p','q','r','s'],
-                  8 : ['t','u','v'],
-                  9 : ['w','x','y','z']}
-  digits_list = list(map(int, str))
-  combinations_result = []
+# def letterNumCombination(str):
+#   letters_list = {2 : ['a','b','c'],
+#                   3 : ['d','e','f'],
+#                   4 : ['g','h','i'],
+#                   5 : ['j','k','l'],
+#                   6 : ['m','n','o'],
+#                   7 : ['p','q','r','s'],
+#                   8 : ['t','u','v'],
+#                   9 : ['w','x','y','z']}
+#   digits_list = list(map(int, str))
+#   combinations_result = []
 
-  def backtrack(index, combination):
+#   def backtrack(index, combination):
 
-    if(index >= len(digits_list)):
-      combinations_result.append(combination.copy())
-      return
+#     if(index >= len(digits_list)):
+#       combinations_result.append(combination.copy())
+#       return
     
-    num = digits_list[index]
+#     num = digits_list[index]
 
-    for i in range(len(letters_list[num])):
-      combination.append(letters_list[num][i])
-      backtrack(index+1, combination)
-      combination.pop()
+#     for i in range(len(letters_list[num])):
+#       combination.append(letters_list[num][i])
+#       backtrack(index+1, combination)
+#       combination.pop()
 
-  backtrack(0, [])
+#   backtrack(0, [])
 
   
-  return combinations_result
+#   return combinations_result
 
-print(letterNumCombination("234"))
+# print(letterNumCombination("234"))
+
+
+# l = [[0 for i in range(3)] for i in range(2)]
+
+# print(l)
+# print(l[0][0])
+# print(l[0][1])
+# print(l[0][2])
+# print(l[1][0])
+# print(l[1][1])
+# print(l[1][2])
+
