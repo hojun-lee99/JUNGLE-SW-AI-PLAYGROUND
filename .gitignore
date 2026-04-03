@@ -98,3 +98,14 @@ dmypy.json
 # vscode extension
 .cph
 tempCodeRunnerFile.py
+
+# C/C++ 빌드 폴더
+**/build/
+
+# 목적 파일 및 기타 컴파일 부산물
+*.o
+*.out
+*.exe
+
+# macOS 디버깅 심볼 폴더 (필요시)
+*.dSYM/
