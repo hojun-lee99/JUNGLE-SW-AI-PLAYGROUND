@@ -109,12 +109,6 @@ void removeNode(USERDATA *pPrev) {
   free(pRemove);
 }
 
-void initDumiData(void) {
-  appendNewNode(28, "lee", "010-1111-1111");
-  appendNewNode(28, "ho", "010-2222-2222");
-  appendNewNode(20, "jun", "010-3333-3333");
-}
-
 void PrintList(void) {
   USERDATA* pTmp = g_HeadNode;
 
@@ -126,8 +120,34 @@ void PrintList(void) {
   putchar('\n');
 }
 
-int main(void) {  
-  initDumiData();
+
+void TestStep02(void) {
+  puts("TestStep02-------------------------");
+  appendNewNode(28, "lee", "010-1111-1111");
+  appendNewNode(28, "ho", "010-2222-2222");
+  appendNewNode(20, "jun", "010-3333-3333");
+
+  PrintList();
+
+  USERDATA *pPrev = NULL;
+
+  if(searchRemoveNode(&pPrev, "ho")) {
+    removeNode(pPrev);
+  }
+
+  PrintList();  
+  
+  releaseList();
+
+  putchar('\n');
+}
+
+void TestStep03(void) {
+  puts("TestStep03-------------------------");
+  appendNewNode(28, "lee", "010-1111-1111");
+  appendNewNode(28, "ho", "010-2222-2222");
+  appendNewNode(20, "jun", "010-3333-3333");
+
   PrintList();
 
   USERDATA *pPrev = NULL;
@@ -139,5 +159,59 @@ int main(void) {
   PrintList();  
   
   releaseList();
+
+  putchar('\n');
+}
+
+void TestStep01(void) {
+  puts("TestStep01-------------------------");
+  appendNewNode(28, "lee", "010-1111-1111");
+  appendNewNode(28, "ho", "010-2222-2222");
+  appendNewNode(20, "jun", "010-3333-3333");
+
+  PrintList();
+
+  USERDATA *pPrev = NULL;
+
+  if(searchRemoveNode(&pPrev, "lee")) {
+    removeNode(pPrev);
+  }
+
+  PrintList();  
+  
+  releaseList();
+
+  putchar('\n');
+}
+
+void TestStep04(void) {
+  puts("TestStep01-------------------------");
+  appendNewNode(28, "lee", "010-1111-1111");
+  appendNewNode(28, "ho", "010-2222-2222");
+  appendNewNode(20, "jun", "010-3333-3333");
+
+  PrintList();
+
+  USERDATA *pPrev = NULL;
+
+  if(searchRemoveNode(&pPrev, "kim")) {
+    removeNode(pPrev);
+  }
+
+  PrintList();  
+  
+  releaseList();
+
+  putchar('\n');
+}
+
+
+
+int main(void) {  
+  TestStep01();
+  TestStep02();
+  TestStep03();
+  TestStep04();
+
   return 0;
 }
