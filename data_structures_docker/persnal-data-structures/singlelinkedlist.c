@@ -10,7 +10,8 @@ typedef struct USERDATA
   struct USERDATA* pNext;
 } USERDATA;
 
-USERDATA *g_HeadNode = NULL;
+// USERDATA *g_HeadNode = NULL;
+USERDATA g_HeadNode = {0, "__dummy__"};
 
 void appendNewNode(int age, const char *pszName, const char *pszPhone) {
   USERDATA *pNewNode = (USERDATA*)malloc(sizeof(USERDATA));
@@ -19,29 +20,25 @@ void appendNewNode(int age, const char *pszName, const char *pszPhone) {
   strlcpy(pNewNode->phone, pszPhone, sizeof(pNewNode->phone));
   pNewNode->pNext = NULL;
 
-  if(g_HeadNode == NULL) {
-    g_HeadNode = pNewNode;
+  // stack 구조
+  // pNewNode->pNext = g_HeadNode;
+  // g_HeadNode = pNewNode;
+
+  // queue 구조
+  USERDATA *pTail = &g_HeadNode;
+
+  while (pTail->pNext != NULL)
+  {
+    pTail = pTail->pNext;
   }
-  else {
-    // stack 구조
-    // pNewNode->pNext = g_HeadNode;
-    // g_HeadNode = pNewNode;
 
-    // queue 구조
-    USERDATA *pTail = g_HeadNode;
+  pTail->pNext = pNewNode;
 
-    while (pTail->pNext != NULL)
-    {
-      pTail = pTail->pNext;
-    }
-
-    pTail->pNext = pNewNode;
-  }
 }
 
 void releaseList() {
-  USERDATA* pTmp = g_HeadNode;
-  USERDATA* pDelete;
+  USERDATA* pTmp = g_HeadNode.pNext;
+  USERDATA* pDelete = NULL;
 
   while (pTmp != NULL)
   {
@@ -53,11 +50,12 @@ void releaseList() {
     free(pDelete);
   }
 
-  g_HeadNode = NULL;
+  //! node를 비워주고 난뒤 더미 노드의 next를 꼭 null로 아니면, free된 쓰레기 값을 참조하고 있음
+  g_HeadNode.pNext = NULL;
 }
 
 USERDATA* searchByName(const char* pszName) {
-  USERDATA* pTmp = g_HeadNode;
+  USERDATA* pTmp = &g_HeadNode;
 
   while (pTmp != NULL)
   {
@@ -72,35 +70,26 @@ USERDATA* searchByName(const char* pszName) {
   return NULL;
 }
 
-USERDATA* searchRemoveNode(USERDATA **ppPrev, char *pszName) {
-  USERDATA *pCur = g_HeadNode;
-  USERDATA *pPrev = NULL;
+USERDATA* searchRemoveNodePrev(char *pszName) {
+  USERDATA *pPrev = &g_HeadNode;
 
-  while (pCur != NULL)
+  while (pPrev->pNext != NULL)
   {
-    if(strcmp(pCur->name, pszName) == 0) {
+    if(strcmp(pPrev->pNext->name, pszName) == 0) {
       printf("\"%s\": Found\n", pszName);
-      *ppPrev = pPrev;
-      return pCur;
+      return pPrev;
     }
-    pPrev = pCur;
-    pCur = pCur->pNext;
+    pPrev = pPrev->pNext;
   }
   
   printf("\"%s\": Not found\n", pszName);
   return NULL;
 }
 
-void removeNode(USERDATA *pPrev) {
+void removeNodeByPrev(USERDATA *pPrev) {
   USERDATA *pRemove = NULL;
 
   if (pPrev == NULL) {
-    if (g_HeadNode != NULL){
-      pRemove = g_HeadNode;
-      g_HeadNode = g_HeadNode->pNext;
-      free(pRemove);
-    }
-
     return;
   }
 
@@ -110,7 +99,7 @@ void removeNode(USERDATA *pPrev) {
 }
 
 void PrintList(void) {
-  USERDATA* pTmp = g_HeadNode;
+  USERDATA* pTmp = &g_HeadNode;
 
   while (pTmp != NULL)
   {
@@ -120,6 +109,26 @@ void PrintList(void) {
   putchar('\n');
 }
 
+void TestStep01(void) {
+  puts("TestStep01-------------------------");
+  appendNewNode(28, "lee", "010-1111-1111");
+  appendNewNode(28, "ho", "010-2222-2222");
+  appendNewNode(20, "jun", "010-3333-3333");
+
+  PrintList();
+
+  USERDATA *pPrev = searchRemoveNodePrev("lee");
+
+  if(pPrev) {
+    removeNodeByPrev(pPrev);
+  }
+
+  PrintList();  
+  
+  releaseList();
+
+  putchar('\n');
+}
 
 void TestStep02(void) {
   puts("TestStep02-------------------------");
@@ -129,10 +138,10 @@ void TestStep02(void) {
 
   PrintList();
 
-  USERDATA *pPrev = NULL;
+  USERDATA *pPrev = searchRemoveNodePrev("ho");
 
-  if(searchRemoveNode(&pPrev, "ho")) {
-    removeNode(pPrev);
+  if(pPrev) {
+    removeNodeByPrev(pPrev);
   }
 
   PrintList();  
@@ -150,10 +159,10 @@ void TestStep03(void) {
 
   PrintList();
 
-  USERDATA *pPrev = NULL;
+  USERDATA *pPrev = searchRemoveNodePrev("jun");
 
-  if(searchRemoveNode(&pPrev, "jun")) {
-    removeNode(pPrev);
+  if(pPrev) {
+    removeNodeByPrev(pPrev);
   }
 
   PrintList();  
@@ -163,39 +172,19 @@ void TestStep03(void) {
   putchar('\n');
 }
 
-void TestStep01(void) {
-  puts("TestStep01-------------------------");
-  appendNewNode(28, "lee", "010-1111-1111");
-  appendNewNode(28, "ho", "010-2222-2222");
-  appendNewNode(20, "jun", "010-3333-3333");
-
-  PrintList();
-
-  USERDATA *pPrev = NULL;
-
-  if(searchRemoveNode(&pPrev, "lee")) {
-    removeNode(pPrev);
-  }
-
-  PrintList();  
-  
-  releaseList();
-
-  putchar('\n');
-}
 
 void TestStep04(void) {
-  puts("TestStep01-------------------------");
+  puts("TestStep04-------------------------");
   appendNewNode(28, "lee", "010-1111-1111");
   appendNewNode(28, "ho", "010-2222-2222");
   appendNewNode(20, "jun", "010-3333-3333");
 
   PrintList();
 
-  USERDATA *pPrev = NULL;
+  USERDATA *pPrev = searchByName("kim");
 
-  if(searchRemoveNode(&pPrev, "kim")) {
-    removeNode(pPrev);
+  if(pPrev) {
+    removeNodeByPrev(pPrev);
   }
 
   PrintList();  
