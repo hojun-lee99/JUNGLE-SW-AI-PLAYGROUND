@@ -116,12 +116,33 @@ int main()
 
 void createQueueFromLinkedList(LinkedList *ll, Queue *q)
 {
-	/* add your code here */
+	// 깊은 복사로 queue 생성
+	ListNode *cur = ll->head;
+
+	while (cur != NULL)
+	{
+		enqueue(q, cur->item);
+		cur = cur->next;
+	}
+	
 }
 
 void removeOddValues(Queue *q)
 {
-	/* add your code here */
+	ListNode *currentNode = q->ll.head;
+	int index = 0;
+
+	while (currentNode != NULL)
+	{
+		if((currentNode->item % 2) != 0){
+			currentNode = currentNode->next;
+			removeNode(&(q->ll), index);
+			continue;
+		}
+
+		currentNode = currentNode->next;
+		index++;
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////////////
