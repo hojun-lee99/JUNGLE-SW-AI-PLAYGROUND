@@ -83,11 +83,11 @@ int main()
 			printf("Enter expressions without spaces to check whether it is balanced or not: ");
 			scanf("%s", str);
 			break;
-        case 2:
-            if(balanced(str))
-                printf("not balanced!\n");
-            else
-                printf("balanced!\n");
+		case 2:
+				if(balanced(str))
+						printf("not balanced!\n");
+				else
+						printf("balanced!\n");
 			break;
 		case 0:
 			break;
@@ -104,7 +104,40 @@ int main()
 ////////////////////////////////////////////////////////////
 int balanced(char *expression)
 {
-/* add your code here */
+	Stack s;
+
+	for (int i = 0; *(expression+i) != '\0'; i++)
+	{
+		char c = *(expression + i);
+
+		if( c == '(' ) {
+			push(&s, ')');
+			continue;
+		}
+		if( c == '{' ) {
+			push(&s, '}');
+			continue;
+		}
+		if( c == '[' ) {
+			push(&s, ']');
+			continue;
+		}
+
+		if (c == ')' || c == '}' || c == ']')
+		{
+			int item = pop(&s);
+
+			if(item != (int)c) {
+				return 1;
+			}
+		}
+	}
+
+	if(!isEmptyStack(&s)) {
+		return 1;
+	}
+
+	return 0;
 }
 
 ////////////////////////////////////////////////////////////
