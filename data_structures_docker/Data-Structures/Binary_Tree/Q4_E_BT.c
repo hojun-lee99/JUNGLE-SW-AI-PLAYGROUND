@@ -103,7 +103,30 @@ int main()
 int sumOfOddNodes(BTNode *node)
 
 {
-    /* add your code here */
+    Stack s;
+    int sum = 0;
+
+    push(&s, node);
+
+    while (s.top != NULL)
+    {
+        BTNode *currentNode = pop(&s);
+        int item = currentNode->item;
+        
+        if((item) % 2 != 0) {
+            sum += item;
+        }
+
+        if(currentNode->left != NULL){
+            push(&s, currentNode->left);
+        }
+
+        if(currentNode->right != NULL){
+            push(&s, currentNode->right);
+        }
+    }
+
+    return sum;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
