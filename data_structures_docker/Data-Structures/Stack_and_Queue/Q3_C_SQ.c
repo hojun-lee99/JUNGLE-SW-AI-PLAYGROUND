@@ -103,7 +103,25 @@ int main()
 
 int isStackPairwiseConsecutive(Stack *s)
 {
-  /* add your code here */
+	// 스택 정수 쌍이 연속되면 return 1 아니면 0
+	Stack tempStack;
+
+	if(((s->ll.size) % 2 != 0) || s->ll.size == 0) {
+		return 0;
+	}
+
+	while (!isEmptyStack(s))
+	{
+		int item1 = pop(s);
+		int item2 = pop(s);
+		int sub = abs(item1 - item2);
+
+		if(sub != 1){
+			return 0;
+		}
+	}
+
+	return 1;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
