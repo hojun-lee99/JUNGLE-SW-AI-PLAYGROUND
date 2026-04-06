@@ -112,7 +112,20 @@ int main()
 
 void reverse(Queue *q)
 {
-/* add your code here */
+	// deque한걸 스택에 push하고
+	// pop한걸 que에 enque
+
+	Stack s;
+
+	while (!isEmptyQueue(q))
+	{
+		push(&s, dequeue(q));
+	}
+
+	while (!isEmptyStack(&s))
+	{
+		enqueue(q, pop(&s));
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
