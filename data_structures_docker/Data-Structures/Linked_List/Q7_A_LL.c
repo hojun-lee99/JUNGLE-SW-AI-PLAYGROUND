@@ -87,7 +87,25 @@ int main()
 
 void RecursiveReverse(ListNode **ptrHead)
 {
-	/* add your code here */
+	// Base case: head가 null이거나 노드가 1개 뿐일때
+	if (*ptrHead == NULL || (*ptrHead)->next == NULL) {
+		return;
+	}
+
+	// 맨앞 노드랑 나머지 노드들로 분리
+	ListNode *first = *ptrHead;
+	ListNode *rest = first->next;
+
+	// 나머지 노드들을 재귀로 뒤집기
+	RecursiveReverse(&(rest));
+
+	// 재귀를 통해 first.next가 맨뒤로 갔으니 frist.next.next = first
+	first->next->next = first;
+	// first 노드의 next를 끊어줌
+	first->next = NULL;
+
+	// 해드를 rest로 수정
+	*ptrHead = rest;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
