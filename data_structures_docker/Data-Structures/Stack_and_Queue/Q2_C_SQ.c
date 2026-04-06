@@ -124,19 +124,35 @@ void createStackFromLinkedList(LinkedList *ll, Stack *s)
 
 void removeEvenValues(Stack *s)
 {
-	ListNode *currentNode = s->ll.head;
-	int index = 0;
+	// ListNode *currentNode = s->ll.head;
+	// int index = 0;
 	
-	while (currentNode != NULL)
-	{
-		if((currentNode->item % 2) == 0){
-			currentNode = currentNode->next;
-			removeNode(&(s->ll), index);
-			continue;
-		}
+	// while (currentNode != NULL)
+	// {
+	// 	if((currentNode->item % 2) == 0){
+	// 		currentNode = currentNode->next;
+	// 		removeNode(&(s->ll), index);
+	// 		continue;
+	// 	}
 
-		currentNode = currentNode->next;
-		index++;
+	// 	currentNode = currentNode->next;
+	// 	index++;
+	// }
+
+	Stack tempS;
+
+	while (!isEmptyStack(s))
+	{
+		push(&tempS, pop(s));
+	}
+
+	while (!isEmptyStack(&tempS))
+	{
+		int item = pop(&tempS);
+
+		if((item % 2) != 0) {
+			push(s, item);
+		}
 	}
 }
 
