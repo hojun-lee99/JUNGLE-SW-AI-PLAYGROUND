@@ -129,20 +129,36 @@ void createQueueFromLinkedList(LinkedList *ll, Queue *q)
 
 void removeOddValues(Queue *q)
 {
-	ListNode *currentNode = q->ll.head;
-	int index = 0;
+	// ListNode *currentNode = q->ll.head;
+	// int index = 0;
 
-	while (currentNode != NULL)
+	// while (currentNode != NULL)
+	// {
+	// 	if((currentNode->item % 2) != 0){
+	// 		currentNode = currentNode->next;
+	// 		removeNode(&(q->ll), index);
+	// 		continue;
+	// 	}
+
+	// 	currentNode = currentNode->next;
+	// 	index++;
+	// }
+
+	Queue tempQ;
+
+	while (!isEmptyQueue(q))
 	{
-		if((currentNode->item % 2) != 0){
-			currentNode = currentNode->next;
-			removeNode(&(q->ll), index);
-			continue;
-		}
-
-		currentNode = currentNode->next;
-		index++;
+		enqueue(&tempQ, dequeue(q));
 	}
+
+	while (!isEmptyQueue(&tempQ))
+	{
+		int item = dequeue(&tempQ);
+
+		if((item % 2) == 0) {
+			enqueue(q, item);
+		}
+	}	
 }
 
 //////////////////////////////////////////////////////////////////////////////////
