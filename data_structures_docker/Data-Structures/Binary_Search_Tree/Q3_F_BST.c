@@ -88,13 +88,16 @@ int main()
 }
 
 //////////////////////////////////////////////////////////////////////////////////
-
+// 스택을 사용해 전위 순회 구현
 void preOrderIterative(BSTNode *root)
 {
 	Stack s;
 	BSTNode *currentNode = root;
 	
+	// 루트 노드를 스택에 추가
 	push(&s, currentNode);
+
+	// 스택이 빌때까지 반복
 	while (peek(&s) != NULL)
 	{
 		currentNode = pop(&s);

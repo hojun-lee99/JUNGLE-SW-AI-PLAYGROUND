@@ -89,6 +89,7 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
+// 스택 1개를 사용해 후위 순회 구현
 void postOrderIterativeS1(BSTNode *root)
 {
 	Stack s = { NULL };
@@ -97,18 +98,22 @@ void postOrderIterativeS1(BSTNode *root)
 
 	BSTNode *lastVisited = NULL;
 
+	// 스택이 비고, 현재 노드가 null일때까지 반복
 	while(peek(&s) != NULL || currentNode != NULL)
 	{
+		// currentNode가 null이 아니면 스택에 push후 왼쪽 자식 노드로 이동
 		if(currentNode != NULL) {
 			push(&s, currentNode);
 			currentNode = currentNode->left;
 		}
+		// currentNode가 null이면
 		else {
 			BSTNode *topNode = peek(&s);
-
+			// 스택의 topNode의 오른쪽 자식이 있고, 방문하지 않았으면 currentNode를 오른쪽으로 이동
 			if( topNode->right != NULL && lastVisited != topNode->right) {
 				currentNode = topNode->right;
 			}
+			// 아니면, topNode 출력 후, pop
 			else {
 				printf("%d ", topNode->item);
 				lastVisited = pop(&s);

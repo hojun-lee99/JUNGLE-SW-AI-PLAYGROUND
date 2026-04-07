@@ -107,7 +107,7 @@ void moveOddItemsToBack(LinkedList *ll)
 		if((currentNode->item) % 2 == 0) {
 			prevNode = currentNode;
 			currentNode = currentNode->next;
-			continue;;
+			continue;
 		}
 		
 		if(prevNode == NULL) {
@@ -116,7 +116,7 @@ void moveOddItemsToBack(LinkedList *ll)
 			tailNode->next = currentNode;
 			tailNode = currentNode;
 			currentNode = ll->head;
-			continue;;
+			continue;
 		}
 
 		prevNode->next = currentNode->next;
